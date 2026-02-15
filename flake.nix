@@ -6,7 +6,7 @@
   outputs = { self, nixpkgs, ... }:
   {
     nixosModules = {
-      web = import "./modules/web.nix";
+      web = import ./modules/web.nix;
     };
   };
 }
