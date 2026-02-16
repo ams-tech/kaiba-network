@@ -8,6 +8,7 @@
   let 
     kaiba_network_modules = {
       web = import ./modules/web.nix;
+      homeserver = import ./modules/homeserver.nix;
     };
   in 
   {

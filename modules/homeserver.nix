@@ -16,8 +16,11 @@ let
   '';
 in
 {
-  networking.hostName = "myhostname";
-  networking.domain = "example.org";
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "info@kaiba.network";
+  };
+  networking.domain = "kaiba.network";
   networking.firewall.allowedTCPPorts = [
     80
     443
