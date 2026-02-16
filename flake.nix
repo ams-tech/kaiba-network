@@ -2,14 +2,20 @@
   description = "Infrastructure definitions for the kaiba.network domain";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
   };
-  outputs = { self, nixpkgs, ... }:
-  {
-    nixosModules = {
+  outputs = { self, nixpkgs, nixos-raspberrypi, ... }@inputs:
+  let 
+    kaiba_network_modules = {
       web = import ./modules/web.nix;
     };
+  in 
+  {
+    nixosModules = kaiba_network_modules;
     nixosConfigurations = {
-      warp = import ./systems/warp.nix;
+      warp = import ./systems/warp.nix{
+          inherit nixos-raspberrypi inputs kaiba_network_modules;
+      };
     };
   };
 }
