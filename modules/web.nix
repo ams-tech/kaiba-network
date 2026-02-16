@@ -4,7 +4,7 @@
 {
   services.nginx = {
     enable = true;
-    virtualHosts.localhost = {
+    virtualHosts."kaiba.network" = {
       locations."/" = {
         return = "200 '<html><body>it works, bitch.</body></html>'";
         extraConfig = ''
@@ -12,5 +12,9 @@
         '';
       };
     };
+  };
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "info@kaiba.network";
   };
 }

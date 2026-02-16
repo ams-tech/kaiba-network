@@ -8,5 +8,8 @@
     nixosModules = {
       web = import ./modules/web.nix;
     };
+    nixosConfigurations = {
+      warp = import ./systems/warp.nix;
+    };
   };
 }
