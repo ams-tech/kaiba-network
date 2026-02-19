@@ -71,6 +71,17 @@ in
         # Forward requests for e.g. SSO and password-resets.
         locations."/_synapse/client".proxyPass = "http://[::1]:8008";
       };
+      "element.${fqdn}" = {
+        enableACME = true;
+        forceSSL = true;
+        serverAliases = [ "element.${config.networking.domain}" ];
+
+        root = pkgs.element-web.override {
+          conf = {
+            default_server_config = clientConfig; # see `clientConfig` from the snippet above.
+          };
+        };
+      };
     };
   };
 
