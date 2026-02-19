@@ -1,5 +1,5 @@
 {
-  description = "Infrastructure definitions for the kaiba.network domain";
+  description = "Infrastructure definitions for kaiba-network.";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";

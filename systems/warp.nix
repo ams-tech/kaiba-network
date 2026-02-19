@@ -43,6 +43,7 @@ nixos-raspberrypi.lib.nixosSystem {
                 enable = true;
                 nssmdns4 = true;
               };
+              services.pcscd.enable = true;
             })
             ({ ... }: {
               fileSystems = {
