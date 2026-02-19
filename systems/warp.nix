@@ -26,6 +26,7 @@ nixos-raspberrypi.lib.nixosSystem {
               networking.hostName = "warp";
               networking.firewall.enable = true;
               networking.firewall.allowedTCPPorts = [ 80 443 ];
+              networking.nameservers = [ "8.8.8.8" "8.8.4.4" "2001:4860:4860::8888" "2001:4860:4860::8844"];
               
               users.users.adam = {
                 isNormalUser = true;
