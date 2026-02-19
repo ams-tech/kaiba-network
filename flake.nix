@@ -7,7 +7,8 @@
   outputs = { self, nixpkgs, nixos-raspberrypi, ... }@inputs:
   let 
     kaiba_network_modules = {
-      homeserver = import ./modules/services/homeserver.nix;
+      homeserver = import ./modules/homeserver.nix;
+      secrets = import ./secrets/configuration.nix;
     };
   in 
   {

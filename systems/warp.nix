@@ -12,6 +12,7 @@ nixos-raspberrypi.lib.nixosSystem {
                 raspberry-pi-5.base
                 raspberry-pi-5.bluetooth
                 kaiba_network_modules.homeserver
+                kaiba_network_modules.secrets
               ];
               boot.loader.raspberry-pi.bootloader = "kernel";
             })

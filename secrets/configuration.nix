@@ -3,16 +3,9 @@
 {
   services.pcscd.enable = true;
 
-  sops = {
-    age = {
-      keyFile = "/path/to/age-yubikey-identity-XXXXXXXX.txt";
-      plugins = [ pkgs.age-plugin-yubikey ];
-      requirePcscd = true;  # Ensures pcscd is available during decryption
-    };
-
-    secrets.my-secret = {
-      sopsFile = secrets/secrets.yaml;
-    };
-  };
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  
+  sops.age.keyFile = "/home/user/.config/sops/age/keys.txt";
 }
 
