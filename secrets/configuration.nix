@@ -3,7 +3,8 @@
 {
   imports =
   [
-    inputs.sops-nix.nixosModules.sops
+    # Import "sops-nix" from the provided pkgs attribute set
+    pkgs.sops
   ];
   services.pcscd.enable = true;
 
