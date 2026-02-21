@@ -1,18 +1,17 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.services.kaibaNetworkSecretsTest;
 in {
   # To enable the service for decoding secrets, you need to set `services.helloNixosTests.enable = true`
   options = {
-    services.kaibaNetworkTestSecret = {
-      enable = mkEnableOption "kaibaNetworkTestSecret";
+    services.kaibaNetworkSecretsTest = {
+      enable = lib.mkEnableOption "kaibaNetworkSecretsTest";
     };
   };
 
   # If we've enabled the `kaibaNetworkService`, set the "config" attribute with this module's attributes
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     sops.secrets."kaiba-network-test-secret" = {
       owner = "sometestservice";
     };
@@ -20,7 +19,7 @@ in {
     users.users.kaiba-network-test-secret = {
       home = "/var/lib/kaiba-network-test-secret";
       createHome = true;
-      description = "User for the kaibaNetworkTestSecret service";
+      description = "User for the kaibaNetworkSecretsTest service";
       isSystemUser = true;
       group = "kaiba-network-test-secret";
     };
@@ -42,5 +41,5 @@ in {
         WorkingDirectory = "/var/lib/kaiba-network-test-secret";
       };
     };
-  }
+  };
 }

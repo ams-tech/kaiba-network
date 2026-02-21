@@ -1,38 +1,25 @@
 {
   description = "Secrets for kaiba-network";
 
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    flake-utils.url = "github:numtide/flake-utils";
+    sops-nix.url = "github:Mic92/sops-nix";
+  };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, sops-nix }@inputs:
     {
-      nixosModules = {
-        kaibaNetworkSecretsTest = import ./modules/service.nix;
-      };
+      #nixosModules = {
+      #  kaibaNetworkSecretsTest = import ./modules/service.nix;
+      #};
     } // flake-utils.lib.eachDefaultSystem
       (system:
-        let
-          # Create a packages overlay with our test service built in           
-          overlay = final: prev: {
-            kaibaNetworkTestSecret = self.packages.${system}.kaibaNetworkTestSecret;
-          };
-          pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
+        let       
+          pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          testSecretsAvailability = pkgs.nixosTest 
-          {
-            name = "test-secrets-availability";
-            nodes.machine = 
-            {
-              config = {
-                imports = [ self.nixosModules.secretsAvailabilityTest ];
-                services.kaibaNetworkTestSecret.enable = true;
-              };
-              testScript = ''
-                machine.wait_for_unit("helloWorld.service")
-                machine.wait_for_open_port(8000)
-                assert "Hello world!" in machine.succeed("curl localhost:8000")
-              '';
-            };
+          checks = {
+            testSecretsAvailability = pkgs.callPackage ./test/sample-secret.nix { inherit self; };
           };
         }
       );
