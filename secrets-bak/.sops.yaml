@@ -1,0 +1,9 @@
+   keys:
+     # - &yubikey age1yubikey1q09xuwg7lgchde4ssw735kzrawqyp4ur3xft4kyycrhr8ka730xgzjt0wam
+     - &warp age1mf2knkygzc64palp39dswz6n8xru9x2cnc06k80ngpqu2u45cpfq66xphx
+     - &malak age1ca0ssch9k2tut5u6mafg40yeaxx920cmw0v3q94psk8mdu8d63gsa87rrg
+   creation_rules:
+     - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+       key_groups:
+       - age:
+         - *warp
