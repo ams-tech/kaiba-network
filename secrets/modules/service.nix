@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  cfg = config.services.kaibaNetworkSecretsTest;
+in
 {
   # To enable the service for decoding secrets, you need to set `services.helloNixosTests.enable = true`
   options = {
@@ -8,7 +11,7 @@
     };
   };
 
-  config = lib.mkIf config.services.kaibaNetworkSecretsTest.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.hello = {
       description = "Says hello on login.";
       wantedBy = [ "multi-user.target" ];

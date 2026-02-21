@@ -1,6 +1,5 @@
 { pkgs }:
 
-
 pkgs.testers.nixosTest {
   name = "sampleSecretTest";
   nodes.machine = { config, pkgs, ... }: {
