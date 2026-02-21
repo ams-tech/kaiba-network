@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+    inputs.sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, nixos-raspberrypi, ... }@inputs:
   let 

@@ -1,10 +1,11 @@
-{ pkgs ? import <nixpkgs> {} }:
-pkgs.mkShell {
-  packages = with pkgs; [
-    import ./configuration.nix
+{ pkgs ? import <nixpkgs> { } }:
+with pkgs;
+mkShell {
+  buildInputs = [
+    nixpkgs-fmt
   ];
+
   shellHook = ''
-    echo "Welcome to the project dev shell!"
-    export NODE_ENV=development
+    # ...
   '';
 }

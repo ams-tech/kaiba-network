@@ -1,10 +1,14 @@
 {
-  description = "My project dev shell";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  outputs = { self, nixpkgs }: {
-    devShells.x86_64-linux.default = pkgs.mkShell {
-      buildInputs = [ pkgs.hello pkgs.git ];
-      shellHook = '' echo "Welcome to the dev shell!" '';
-    };
-  };
+  description = "my project description";
+
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let pkgs = nixpkgs.legacyPackages.${system}; in
+        {
+          devShells.default = import ./shell.nix { inherit pkgs; };
+        }
+      );
 }
