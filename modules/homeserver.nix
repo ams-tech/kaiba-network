@@ -57,7 +57,8 @@ in
         # locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
           root = pkgs.element-web.override {
           conf = {
-            default_server_config = clientConfig; # see `clientConfig` from the snippet above.
+            default_server_config = "$(fqdn)"; # see `clientConfig` from the snippet above.
+            default_theme = "dark";
           };
         };
       };
