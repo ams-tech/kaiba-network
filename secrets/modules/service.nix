@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   cfg = config.services.kaibaNetworkSecretsTest;
@@ -12,12 +12,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.hello = {
-      description = "Says hello on login.";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.hello}/bin/hello -g 'Hello, User!'";
-      };
+    users.users.kaiba-network-secrets-test = {
+      createHome = true;
+      isSystemUser = true;
+      group = "kaiba-network-secrets-test";
+      home = "/var/lib/kaiba-network-secrets-test";
     };
+    users.groups.kaiba-network-secrets-test = { };
   };
 }
