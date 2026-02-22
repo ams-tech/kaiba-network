@@ -50,14 +50,14 @@ in
         # is 8448.
         # Further reference can be found in the docs about delegation under
         # https://element-hq.github.io/synapse/latest/delegate.html
-        # locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
         # This is usually needed for homeserver discovery (from e.g. other Matrix clients).
         # Further reference can be found in the upstream docs at
         # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
-        # locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
-          root = pkgs.element-web.override {
+        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+        root = pkgs.element-web.override {
           conf = {
-            default_server_config = "$(fqdn)"; # see `clientConfig` from the snippet above.
+            default_server_config = clientConfig; # see `clientConfig` from the snippet above.
             default_theme = "dark";
           };
         };
