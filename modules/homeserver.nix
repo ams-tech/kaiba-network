@@ -8,6 +8,7 @@ let
   fqdn = "${config.networking.hostName}.${config.networking.domain}";
   baseUrl = "https://${fqdn}";
   clientConfig."m.homeserver".base_url = baseUrl;
+  clientConfig."m.homeserver".server_name = config.networking.domain;
   serverConfig."m.server" = "${fqdn}:443";
   mkWellKnown = data: ''
     default_type application/json;
