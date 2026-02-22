@@ -55,11 +55,10 @@ in
         # Further reference can be found in the upstream docs at
         # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
         # locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
-        locations."/" = {
-          return = "200 '<html><body>it works, bitch.</body></html>'";
-          extraConfig = ''
-            default_type text/html;
-          '';
+          root = pkgs.element-web.override {
+          conf = {
+            default_server_config = clientConfig; # see `clientConfig` from the snippet above.
+          };
         };
       };
       "${fqdn}" = {
