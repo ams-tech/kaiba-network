@@ -83,6 +83,7 @@ in
 
   services.matrix-synapse = {
     enable = true;
+    settings.enable_registration = true;
     extraConfigFiles = [ "/run/secrets/matrix-shared-secrets" ];
     settings.server_name = config.networking.domain;
     # The public base URL value must match the `base_url` value set in `clientConfig` above.
