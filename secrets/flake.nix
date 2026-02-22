@@ -30,9 +30,8 @@
               # This is a Python "unittest.TestCase", where `t` is the testcase object you can call "asserts" against
               # https://nixos.org/manual/nixos/stable/#sec-writing-nixos-tests
               testScript = ''
-                import pathlib
-                p = pathlib.Path("/a/b/c")
-                t.assertTrue(p.is_file())
+                machine.wait_for_unit("sometestservice.service")   
+                machine.wait_for_file("/var/lib/kaiba-network-secrets-test/test.txt")
               '';
             };
           };

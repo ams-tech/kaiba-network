@@ -19,5 +19,20 @@ in
       home = "/var/lib/kaiba-network-secrets-test";
     };
     users.groups.kaiba-network-secrets-test = { };
+    systemd.services.sometestservice = {
+      description = "helloNixosTests server";
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      script = ''
+        echo "hello world" > /var/lib/kaiba-network-secrets-test/test.txt
+      '';
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        User = "kaiba-network-secrets-test";
+        Group = "kaiba-network-secrets-test";
+      };
+    };
   };
 }
