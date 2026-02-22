@@ -85,6 +85,8 @@ in
     enable = true;
     settings.enable_registration = true;
     extraConfigFiles = [ "/run/secrets/matrix-shared-secrets" ];
+    enable_registration_captcha = true;
+    recaptcha_public_key = "6LcNhHQsAAAAAE62qeCVjqMZvsec3ZHy34HRmdZb";
     settings.server_name = config.networking.domain;
     # The public base URL value must match the `base_url` value set in `clientConfig` above.
     # The default value here is based on `server_name`, so if your `server_name` is different
