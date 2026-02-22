@@ -12,6 +12,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops.defaultSopsFile = ../secrets/secrets.yaml;
+    sops.defaultSopsFormat = "yaml";
+    
+    sops.age.keyFile = "/home/user/.config/sops/age/keys.txt";
+
+    sops.secrets.adams-test-key = { 
+      owner = "kaiba-network-secrets-test";
+    };
     users.users.kaiba-network-secrets-test = {
       createHome = true;
       isSystemUser = true;
@@ -21,10 +29,9 @@ in
     users.groups.kaiba-network-secrets-test = { };
     systemd.services.sometestservice = {
       description = "helloNixosTests server";
-      after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       script = ''
-        echo "hello world" > /var/lib/kaiba-network-secrets-test/test.txt
+        $(cat ${config.sops.secrets.adams-test-key.path}) > /var/lib/kaiba-network-secrets-test/test.txt
       '';
 
       serviceConfig = {

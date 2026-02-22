@@ -23,7 +23,10 @@
             testSecretsAvailability = pkgs.testers.nixosTest {
               name = "sampleSecretTest";
               nodes.machine = { config, pkgs, ... }: {
-                imports = [ self.nixosModules.kaibaNetworkSecretsTest ];
+                imports = [ 
+                  self.nixosModules.kaibaNetworkSecretsTest 
+                  inputs.sops-nix.nixosModules.sops
+                ];
                 services.kaibaNetworkSecretsTest.enable = true;
               };
 
