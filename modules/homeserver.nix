@@ -27,17 +27,8 @@ in
     443
   ];
 
-  services.postgresql = {
-    enable = true;
-    ensureUsers = [
-      {
-        name = "matrix-synapse";
-        ensureDBOwnership = true;
-      }
-    ];
-    ensureDatabases = [ "matrix-synapse" ];
-  };
-
+  services.postgresql.enable = true;
+  
   services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
