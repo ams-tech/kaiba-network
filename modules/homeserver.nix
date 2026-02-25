@@ -28,7 +28,7 @@ in
   ];
 
   services.postgresql.enable = true;
-  
+
   services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
@@ -87,7 +87,7 @@ in
     settings.server_name = config.networking.domain;
     settings.enable_registration = true;
     settings.enable_registration_captcha = true;
-    settings.recaptcha_public_key = "6LcF-XYsAAAAABZGGuG4OMj_NSBxt0aokeey1Mu5";
+    settings.recaptcha_public_key = "6LdH-3YsAAAAABDTUkTNZOndoIh_BR3r8yH9SHWZ";
     # The public base URL value must match the `base_url` value set in `clientConfig` above.
     # The default value here is based on `server_name`, so if your `server_name` is different
     # from the value of `fqdn` above, you will likely run into some mismatched domain names
