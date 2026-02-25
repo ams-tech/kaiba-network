@@ -67,9 +67,9 @@ nixos-raspberrypi.lib.nixosSystem {
                 };
                 "/data" = {
                   device = "/dev/nvmen1p1";
-                  fsType = "zfs";
+                  fsType = "ext4";
                   options = [ "noatime" ];
-                }
+                };
               };
             })
           ];
