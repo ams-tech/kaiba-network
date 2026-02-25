@@ -1,3 +1,6 @@
+# "Warp" is a physical Raspberry Pi 5 in my home. It runs NixOS and is configured using this flake.
+# This system serves as the "trusted host" for "kaiba.network" for the limited "trusted host" operations our platform needs.
+# Longer term, the "trusted host" operations should be distributed across multiple hosts, but for now, this is a single point of failure for the "trusted host" operations.
 {
   nixos-raspberrypi,
   inputs,
@@ -62,6 +65,11 @@ nixos-raspberrypi.lib.nixosSystem {
                   fsType = "ext4";
                   options = [ "noatime" ];
                 };
+                "/data" = {
+                  device = "/dev/nvmen1p1";
+                  fsType = "zfs";
+                  options = [ "noatime" ];
+                }
               };
             })
           ];
