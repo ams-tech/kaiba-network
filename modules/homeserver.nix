@@ -33,7 +33,9 @@ in
       {
         name = "matrix-synapse";
         ensureDBOwnership = true;
+      }
     ];
+    ensureDatabases = [ "matrix-synapse" ];
   };
 
   services.nginx = {
