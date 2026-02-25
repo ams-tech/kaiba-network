@@ -65,11 +65,6 @@ nixos-raspberrypi.lib.nixosSystem {
                   fsType = "ext4";
                   options = [ "noatime" ];
                 };
-                "/data" = {
-                  device = "/dev/nvmen1p1";
-                  fsType = "ext4";
-                  options = [ "noatime" ];
-                };
               };
             })
           ];
