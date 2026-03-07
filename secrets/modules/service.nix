@@ -31,7 +31,7 @@ in
       description = "helloNixosTests server";
       wantedBy = [ "multi-user.target" ];
       script = ''
-        $(cat ${config.sops.secrets.adams-test-key.path}) > /var/lib/kaiba-network-secrets-test/test.txt
+        "$(cat ${config.sops.secrets.adams-test-key.path}) > /var/lib/kaiba-network-secrets-test/test.txt
       '';
 
       serviceConfig = {

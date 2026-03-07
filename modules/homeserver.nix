@@ -36,6 +36,22 @@ in
     recommendedGzipSettings = true;
     recommendedProxySettings = true;
     virtualHosts = {
+        # Piggybacking pseudo.design here until I get secureboot running on the other unit...
+      "pseudo.design" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          return = "200 '<html><body>Landing page for pseudo.design</body></html>'";
+          extraConfig = ''
+            default_type text/html;
+          '';
+        };
+      };
+      "www.pseudo.design" = {
+        enableACME = true;
+        forceSSL = true;
+        globalRedirect = "pseudo.design";
+      };
       # If the A and AAAA DNS records on example.org do not point on the same host as the
       # records for myhostname.example.org, you can easily move the /.well-known
       # virtualHost section of the code to the host that is serving example.org, while
